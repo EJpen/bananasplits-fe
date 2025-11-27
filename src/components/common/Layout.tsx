@@ -11,7 +11,7 @@ import {
   Split,
 } from "lucide-react";
 import { useLayoutStore } from "../stores/layoutStore";
-import { UserRole } from "../../types/types";
+import { UserRole } from "../../types";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -39,9 +39,9 @@ export const Layout: React.FC<LayoutProps> = ({
             path: "/admin",
           },
           {
-            name: "Members",
+            name: "Users",
             icon: <Users size={20} />,
-            path: "/admin/members",
+            path: "/admin/users",
           },
           {
             name: "Settings",

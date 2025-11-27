@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { UserRole } from "../../../types/types";
+import { UserRole } from "../../../types";
 
 interface SignupState {
   currentStep: number;

@@ -4,7 +4,7 @@ import { Check, User, Users, Mail, Wallet } from "lucide-react";
 import { Button, Input, Card } from "../../../components/common/UI";
 
 import { useSignupStore } from "../stores/signupStore";
-import { UserRole } from "../../../types/types";
+import { UserRole } from "../../../types";
 
 export const Signup: React.FC = () => {
   const navigate = useNavigate();

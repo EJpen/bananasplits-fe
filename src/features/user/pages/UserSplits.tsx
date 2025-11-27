@@ -2,11 +2,14 @@ import React from "react";
 import { Layout } from "../../../components/common/Layout";
 import { Button } from "../../../components/common/UI";
 import { useSplitStore } from "../stores/splitStore";
-import { UserRole } from "../../../types/types";
+import { UserRole } from "../../../types";
 import { Plus, Users, Calendar, TrendingUp } from "lucide-react";
+import { CreateSplitModal } from "../components/CreateSplitModal";
+import { SplitDetailDrawer } from "../components/SplitDetailDrawer";
 
 export const UserSplits: React.FC = () => {
-  const { splits, setCreateSplitOpen } = useSplitStore();
+  const { splits, setCreateSplitOpen, openDetailDrawer, toggleSplitStatus } =
+    useSplitStore();
 
   return (
     <Layout role={UserRole.CREATOR}>
@@ -65,8 +68,8 @@ export const UserSplits: React.FC = () => {
         </div>
 
         {/* Splits List */}
-        <div className="bg-slate-900 rounded-2xl border border-slate-800">
-          <div className="p-6 border-b border-slate-800/50">
+        <div className="bg-slate-900 rounded-2xl border border-slate-800 flex flex-col max-h-[600px]">
+          <div className="p-6 border-b border-slate-800/50 shrink-0">
             <h3 className="text-lg font-bold text-white">All Splits</h3>
           </div>
 
@@ -83,7 +86,7 @@ export const UserSplits: React.FC = () => {
               </p>
             </div>
           ) : (
-            <div className="divide-y divide-slate-800/50">
+            <div className="divide-y divide-slate-800/50 overflow-y-auto">
               {splits.map((split) => (
                 <div
                   key={split.id}
@@ -171,9 +174,19 @@ export const UserSplits: React.FC = () => {
 
                     {/* Actions */}
                     <div className="flex gap-2">
-                      <Button variant="secondary">View Details</Button>
+                      <Button
+                        variant="secondary"
+                        onClick={() => openDetailDrawer(split)}
+                      >
+                        View Details
+                      </Button>
                       {split.status === "active" && (
-                        <Button variant="text">Deactivate</Button>
+                        <Button
+                          variant="text"
+                          onClick={() => toggleSplitStatus(split.id)}
+                        >
+                          Deactivate
+                        </Button>
                       )}
                     </div>
                   </div>
@@ -183,6 +196,9 @@ export const UserSplits: React.FC = () => {
           )}
         </div>
       </div>
+
+      <CreateSplitModal />
+      <SplitDetailDrawer />
     </Layout>
   );
 };

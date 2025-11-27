@@ -1,7 +1,11 @@
 import React from "react";
 import { Layout } from "../../../components/common/Layout";
 import { Card, Badge, Button } from "../../../components/common/UI";
-import { MOCK_USERS, REVENUE_DATA, MOCK_USER_DISTRIBUTION } from "../../../constants/mock.constants";
+import {
+  MOCK_USERS,
+  REVENUE_DATA,
+  MOCK_USER_DISTRIBUTION,
+} from "../../../constants/mock.constants";
 import { useAdminStore } from "../stores/adminStore";
 import {
   XAxis,
@@ -23,7 +27,7 @@ import {
   CheckCircle,
   XCircle,
 } from "lucide-react";
-import { UserRole } from "../../../types/types";
+import { UserRole } from "../../../types";
 
 export const AdminDashboard: React.FC = () => {
   const { searchTerm, setSearchTerm } = useAdminStore();
@@ -76,7 +80,7 @@ export const AdminDashboard: React.FC = () => {
           </Card>
 
           <Card>
-            <p className="text-sm font-medium text-slate-400">Total Members</p>
+            <p className="text-sm font-medium text-slate-400">Total Users</p>
             <h3 className="text-3xl font-bold text-white mt-2">8,502</h3>
             <div className="mt-4 flex items-center text-sm">
               <span className="text-banana-400 bg-banana-400/10 px-2 py-0.5 rounded mr-2">

@@ -20,7 +20,7 @@ import {
   Percent,
   Info,
 } from "lucide-react";
-import { UserRole } from "../../../types/types";
+import { UserRole } from "../../../types";
 
 // Mock Data
 const STATS = [
@@ -68,7 +68,7 @@ export const UserDashboard: React.FC = () => {
       <div className="space-y-6">
         <div className="flex flex-col justify-between md:flex-row md:items-center gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white">Hello, Alice 👋</h1>
+            <h1 className="text-2xl font-bold text-white">Hello, John 👋</h1>
             <p className="text-slate-400">
               Here's what's happening with your splits today.
             </p>

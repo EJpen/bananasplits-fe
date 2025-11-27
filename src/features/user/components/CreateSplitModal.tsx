@@ -96,20 +96,26 @@ export const CreateSplitModal: React.FC = () => {
             {/* Creator Row */}
             <div className="flex items-center gap-3 bg-slate-900/50 p-3 rounded-lg border border-slate-700">
               <div className="w-10 h-10 rounded-full bg-linear-to-tr from-banana-600 to-banana-500 flex items-center justify-center text-sm font-bold text-dark-900 shrink-0">
-                BD
+                J
               </div>
               <div className="flex-1">
-                <p className="text-sm font-semibold text-white">BDE Agency</p>
+                <p className="text-sm font-semibold text-white">John Doe</p>
                 <p className="text-xs text-slate-500">Creator</p>
               </div>
               <div className="flex items-center gap-2">
                 <input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   value={creatorPercentage}
-                  onChange={(e) => setCreatorPercentage(Number(e.target.value))}
-                  min="0"
-                  max="100"
-                  className="w-20 bg-slate-800 border border-slate-600 rounded px-3 py-2 text-right text-sm text-white focus:outline-none focus:border-banana-400"
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/[^0-9]/g, "");
+                    const num =
+                      value === ""
+                        ? 0
+                        : Math.min(100, Math.max(0, Number(value)));
+                    setCreatorPercentage(num);
+                  }}
+                  className="w-15 bg-slate-800 border border-slate-600 rounded px-3 py-2 text-center text-sm text-white focus:outline-none focus:border-banana-400"
                 />
                 <span className="text-slate-400">%</span>
               </div>
@@ -144,14 +150,18 @@ export const CreateSplitModal: React.FC = () => {
                 </button>
                 <div className="flex items-center gap-2">
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     value={member.percentage}
-                    onChange={(e) =>
-                      updateMemberPercentage(member.id, Number(e.target.value))
-                    }
-                    min="0"
-                    max="100"
-                    className="w-20 bg-slate-800 border border-slate-600 rounded px-3 py-2 text-right text-sm text-white focus:outline-none focus:border-banana-400"
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/[^0-9]/g, "");
+                      const num =
+                        value === ""
+                          ? 0
+                          : Math.min(100, Math.max(0, Number(value)));
+                      updateMemberPercentage(member.id, num);
+                    }}
+                    className="w-15 bg-slate-800 border border-slate-600 rounded px-3 py-2 text-center text-sm text-white focus:outline-none focus:border-banana-400"
                   />
                   <span className="text-slate-400">%</span>
                 </div>

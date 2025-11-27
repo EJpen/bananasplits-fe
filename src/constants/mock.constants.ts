@@ -1,11 +1,6 @@
-import type {
-  User,
-  Transaction,
-  ChartDataPoint,
-  RateTiers,
-} from "../types/types";
+import type { User, Transaction, ChartDataPoint, RateTiers } from "../types";
 
-import { UserRole } from "../types/types";
+import { UserRole } from "../types";
 
 export const MOCK_USERS: User[] = [
   {
