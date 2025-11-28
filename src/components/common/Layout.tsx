@@ -9,6 +9,7 @@ import {
   Wallet,
   Settings,
   Split,
+  WalletCards,
 } from "lucide-react";
 import { useLayoutStore } from "../stores/layoutStore";
 import { UserRole } from "../../types";
@@ -66,9 +67,19 @@ export const Layout: React.FC<LayoutProps> = ({
             path: "/dashboard/team",
           },
           {
-            name: "Wallet",
+            name: "Transactions",
             icon: <Wallet size={20} />,
+            path: "/dashboard/transactions",
+          },
+          {
+            name: "Wallet",
+            icon: <WalletCards size={20} />,
             path: "/dashboard/wallet",
+          },
+          {
+            name: "Settings",
+            icon: <Settings size={20} />,
+            path: "/dashboard/settings",
           },
         ];
 

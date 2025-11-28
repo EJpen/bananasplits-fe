@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Layout } from "../../../components/common/Layout";
 import { Button, Dialog, Card, Input } from "../../../components/common/UI";
 import Modal from "../../../components/common/Modal";
@@ -45,6 +46,7 @@ const STATS = [
 ];
 
 export const UserDashboard: React.FC = () => {
+  const navigate = useNavigate();
   const {
     isSubscriptionModalOpen,
     isInviteOpen,
@@ -122,7 +124,10 @@ export const UserDashboard: React.FC = () => {
                 <h3 className="text-lg font-bold text-white">
                   Recent Transactions
                 </h3>
-                <button className="text-sm text-slate-400 hover:text-white transition-colors">
+                <button
+                  className="text-sm text-slate-400 hover:text-white transition-colors"
+                  onClick={() => navigate("/dashboard/transactions")}
+                >
                   View All
                 </button>
               </div>
@@ -264,7 +269,10 @@ export const UserDashboard: React.FC = () => {
                   <p className="font-mono text-sm opacity-80">
                     •••• •••• •••• 4288
                   </p>
-                  <Button className="bg-dark-900/20 hover:bg-dark-900/30 text-dark-900 border-none text-xs px-3 py-1.5">
+                  <Button
+                    className="bg-dark-900/20 hover:bg-dark-900/30 text-dark-900 border-none text-xs px-3 py-1.5"
+                    onClick={() => navigate("/dashboard/wallet")}
+                  >
                     Manage
                   </Button>
                 </div>
@@ -297,7 +305,12 @@ export const UserDashboard: React.FC = () => {
                   </div>
                 ))}
               </div>
-              <Button variant="text" fullWidth className="mt-4">
+              <Button
+                variant="text"
+                fullWidth
+                className="mt-4"
+                onClick={() => navigate("/dashboard/team")}
+              >
                 View All Members
               </Button>
             </Card>

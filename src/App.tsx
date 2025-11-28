@@ -10,6 +10,9 @@ import { Signup } from "./features/auth/pages/Signup";
 import { AdminDashboard } from "./features/admin/pages/AdminDashboard";
 import { UserDashboard } from "./features/user/pages/UserDashboard";
 import { UserSplits } from "./features/user/pages/UserSplits";
+import { UserTeam } from "./features/user/pages/UserTeam";
+import { UserTransactions } from "./features/user/pages/UserTransactions";
+import { UserWallet } from "./features/user/pages/UserWallet";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +22,9 @@ const App: React.FC = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<UserDashboard />} />
         <Route path="/dashboard/splits" element={<UserSplits />} />
+        <Route path="/dashboard/team" element={<UserTeam />} />
+        <Route path="/dashboard/transactions" element={<UserTransactions />} />
+        <Route path="/dashboard/wallet" element={<UserWallet />} />
         <Route path="/admin/*" element={<AdminDashboard />} />
 
         {/* Fallback */}

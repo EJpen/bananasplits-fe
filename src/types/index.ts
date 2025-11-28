@@ -58,3 +58,22 @@ export interface Split {
   members: SplitMember[];
   totalPercentage: number;
 }
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  splits: string[];
+  status: "active" | "pending";
+  bankConnected: boolean;
+}
+
+export interface Wallet {
+  id: string;
+  bankName: string;
+  last4: string;
+  balance?: string;
+  accountType?: string;
+  platform?: string;
+}

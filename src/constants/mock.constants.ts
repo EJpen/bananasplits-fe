@@ -1,4 +1,11 @@
-import type { User, Transaction, ChartDataPoint, RateTiers } from "../types";
+import type {
+  User,
+  Transaction,
+  ChartDataPoint,
+  RateTiers,
+  TeamMember,
+  Wallet,
+} from "../types";
 
 import { UserRole } from "../types";
 
@@ -189,4 +196,75 @@ export const MOCK_USER_DISTRIBUTION = [
   { name: "Creators", value: 1240, color: "#facc15" }, // banana-400
   { name: "Members", value: 850, color: "#a1a1aa" }, // zinc-400
   { name: "Pending", value: 124, color: "#ef4444" }, // red-500
+];
+
+export const MOCK_WALLETS: Wallet[] = [
+  {
+    id: "wallet_1",
+    bankName: "Chase",
+    last4: "4288",
+    balance: "$12,345.00",
+    accountType: "Checking",
+    platform: "YouTube",
+  },
+  {
+    id: "wallet_2",
+    bankName: "Chase",
+    last4: "4288",
+    balance: "$8,120.50",
+    accountType: "Checking",
+    platform: "TikTok",
+  },
+  {
+    id: "wallet_3",
+    bankName: "Wells Fargo",
+    last4: "9921",
+    balance: "$3,450.25",
+    accountType: "Savings",
+    platform: "OnlyFans",
+  },
+  {
+    id: "wallet_4",
+    bankName: "Bank of America",
+    last4: "1120",
+    balance: "$1,200.00",
+    accountType: "Visa Debit",
+    platform: "Instagram",
+  },
+];
+
+export const MOCK_TEAM_MEMBERS: TeamMember[] = [
+  {
+    id: "1",
+    name: "Mark Turner",
+    email: "mark@edit.com",
+    role: "Lead Editor",
+    splits: [
+      "YouTube AdSense",
+      "Sponsorships",
+      "Marx X EJ Agency",
+      "Merch Store",
+      "Live Events",
+    ],
+    status: "active",
+    bankConnected: true,
+  },
+  {
+    id: "2",
+    name: "Sarah Lee",
+    email: "sarah@write.com",
+    role: "Scriptwriter",
+    splits: ["YouTube AdSense"],
+    status: "active",
+    bankConnected: true,
+  },
+  {
+    id: "3",
+    name: "Davie504",
+    email: "slap@bass.com",
+    role: "Bass Player",
+    splits: ["Merch Store", "Live Events"],
+    status: "pending",
+    bankConnected: false,
+  },
 ];
