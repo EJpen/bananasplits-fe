@@ -54,7 +54,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-left flex items-center justify-between focus:outline-none focus:border-banana-400 transition-colors"
+        className="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-left flex items-center justify-between gap-3 focus:outline-none focus:border-banana-400 transition-colors"
       >
         <span className={selectedOption ? "text-white" : "text-slate-400"}>
           {selectedOption ? selectedOption.name : placeholder}

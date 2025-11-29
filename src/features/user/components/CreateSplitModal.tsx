@@ -155,7 +155,7 @@ export const CreateSplitModal: React.FC = () => {
                     onChange={(e) =>
                       updateMemberEmail(member.id, e.target.value)
                     }
-                    placeholder="Creator Email Address"
+                    placeholder="Member Email Address"
                     className="w-full bg-transparent border-none text-sm text-white placeholder:text-slate-500 focus:outline-none"
                   />
                 </div>

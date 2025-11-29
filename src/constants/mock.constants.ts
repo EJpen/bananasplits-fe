@@ -26,7 +26,7 @@ export const MOCK_USERS: User[] = [
     lastName: "Maker",
     email: "alice@banana.com",
     role: UserRole.CREATOR,
-    status: "active",
+    status: "verified",
     bankConnected: true,
   },
   {
@@ -35,7 +35,7 @@ export const MOCK_USERS: User[] = [
     lastName: "Editor",
     email: "bob@banana.com",
     role: UserRole.MEMBER,
-    status: "active",
+    status: "verified",
     bankConnected: true,
   },
   {
@@ -53,7 +53,7 @@ export const MOCK_USERS: User[] = [
     lastName: "Manager",
     email: "dave@banana.com",
     role: UserRole.ADMIN,
-    status: "active",
+    status: "verified",
     bankConnected: true,
   },
 ];
@@ -256,7 +256,7 @@ export const MOCK_TEAM_MEMBERS: TeamMember[] = [
       "Merch Store",
       "Live Events",
     ],
-    status: "active",
+    status: "verified",
     bankConnected: true,
   },
   {
@@ -265,7 +265,7 @@ export const MOCK_TEAM_MEMBERS: TeamMember[] = [
     email: "sarah@write.com",
     role: "Scriptwriter",
     splits: ["YouTube AdSense"],
-    status: "active",
+    status: "verified",
     bankConnected: true,
   },
   {

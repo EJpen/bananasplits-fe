@@ -12,7 +12,7 @@ export interface User {
   lastName: string;
   email: string;
   role: UserRole;
-  status: "active" | "pending" | "suspended";
+  status: "verified" | "pending" | "suspended";
   bankConnected: boolean;
 }
 
@@ -66,7 +66,7 @@ export interface TeamMember {
   email: string;
   role: string;
   splits: string[];
-  status: "active" | "pending";
+  status: "verified" | "pending";
   bankConnected: boolean;
 }
 

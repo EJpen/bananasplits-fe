@@ -8,7 +8,7 @@ interface TeamStore {
   // Actions
   removeMember: (id: string) => void;
   addMember: (member: TeamMember) => void;
-  updateMemberStatus: (id: string, status: "active" | "pending") => void;
+  updateMemberStatus: (id: string, status: "verified" | "pending") => void;
   getTotalMembers: () => number;
   getActiveMembers: () => number;
   getPendingMembers: () => number;
@@ -40,7 +40,7 @@ export const useTeamStore = create<TeamStore>((set, get) => ({
   },
 
   getActiveMembers: () => {
-    return get().members.filter((m) => m.status === "active").length;
+    return get().members.filter((m) => m.status === "verified").length;
   },
 
   getPendingMembers: () => {

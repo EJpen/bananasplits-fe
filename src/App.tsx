@@ -8,11 +8,14 @@ import {
 import { Login } from "./features/auth/pages/Login";
 import { Signup } from "./features/auth/pages/Signup";
 import { AdminDashboard } from "./features/admin/pages/AdminDashboard";
+import { AdminUsers } from "./features/admin/pages/AdminUsers";
+import { AdminSettings } from "./features/admin/pages/AdminSettings";
 import { UserDashboard } from "./features/user/pages/UserDashboard";
 import { UserSplits } from "./features/user/pages/UserSplits";
 import { UserTeam } from "./features/user/pages/UserTeam";
 import { UserTransactions } from "./features/user/pages/UserTransactions";
 import { UserWallet } from "./features/user/pages/UserWallet";
+import { UserSettings } from "./features/user/pages/UserSettings";
 
 const App: React.FC = () => {
   return (
@@ -25,7 +28,10 @@ const App: React.FC = () => {
         <Route path="/dashboard/team" element={<UserTeam />} />
         <Route path="/dashboard/transactions" element={<UserTransactions />} />
         <Route path="/dashboard/wallet" element={<UserWallet />} />
-        <Route path="/admin/*" element={<AdminDashboard />} />
+        <Route path="/dashboard/settings" element={<UserSettings />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
+        <Route path="/admin/settings" element={<AdminSettings />} />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />

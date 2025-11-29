@@ -175,7 +175,7 @@ export const UserTeam: React.FC = () => {
                       </span>
                       <span
                         className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide border ${
-                          member.status === "active"
+                          member.status === "verified"
                             ? "bg-green-500/10 text-green-400 border-green-500/20"
                             : "bg-banana-400/10 text-banana-400 border-banana-400/20"
                         }`}
