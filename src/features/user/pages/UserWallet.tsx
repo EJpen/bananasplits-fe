@@ -1,74 +1,12 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { Plus, Building2, ExternalLink } from "lucide-react";
 import { Layout } from "../../../components/common/Layout";
 import BankCard from "../../../components/common/BankCard";
-import { useWalletStore } from "../stores/walletStore";
-import { Button } from "../../../components/common/UI";
+import { SwipableCardStack } from "../../../components/common/SwipableCardStack";
+import { useWalletStore, type WalletCard } from "../stores/walletStore";
 
 export const UserWallet: React.FC = () => {
   const { wallets } = useWalletStore();
-  const [cardDisplayOrder, setCardDisplayOrder] = useState<number[]>(() =>
-    wallets.map((_, i) => i)
-  );
-  const [dragX, setDragX] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const dragStartX = useRef(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const displayedCards = cardDisplayOrder
-    .map((index) => wallets[index])
-    .filter(Boolean);
-
-  const cycleDisplayOrder = () => {
-    setCardDisplayOrder((prev) => {
-      const newOrder = [...prev];
-      const first = newOrder.shift();
-      if (first !== undefined) newOrder.push(first);
-      return newOrder;
-    });
-  };
-
-  const handleDragStart = (clientX: number) => {
-    setIsDragging(true);
-    dragStartX.current = clientX;
-  };
-
-  const handleDragMove = (clientX: number) => {
-    if (!isDragging) return;
-    const delta = clientX - dragStartX.current;
-    setDragX(delta);
-  };
-
-  const handleDragEnd = () => {
-    setIsDragging(false);
-
-    if (Math.abs(dragX) > 100) {
-      const direction = dragX > 0 ? 1 : -1;
-      setDragX(direction * 1000);
-
-      setTimeout(() => {
-        cycleDisplayOrder();
-        setDragX(0);
-      }, 300);
-    } else {
-      setDragX(0);
-    }
-  };
-
-  // Mouse Handlers
-  const onMouseDown = (e: React.MouseEvent) => handleDragStart(e.clientX);
-  const onMouseMove = (e: React.MouseEvent) => handleDragMove(e.clientX);
-  const onMouseUp = () => handleDragEnd();
-  const onMouseLeave = () => {
-    if (isDragging) handleDragEnd();
-  };
-
-  // Touch Handlers
-  const onTouchStart = (e: React.TouchEvent) =>
-    handleDragStart(e.touches[0].clientX);
-  const onTouchMove = (e: React.TouchEvent) =>
-    handleDragMove(e.touches[0].clientX);
-  const onTouchEnd = () => handleDragEnd();
 
   return (
     <Layout>
@@ -84,72 +22,25 @@ export const UserWallet: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mt-20">
           <div className="space-y-4">
-            <div
-              className="relative h-[300px] w-full max-w-md mx-auto md:mx-0 perspective-1000 pt-10"
-              ref={containerRef}
-              onMouseMove={onMouseMove}
-              onMouseUp={onMouseUp}
-              onMouseLeave={onMouseLeave}
-              onTouchMove={onTouchMove}
-              onTouchEnd={onTouchEnd}
-            >
-              {displayedCards.map((wallet, index) => {
-                // Only render top 3 cards for performance
-                if (index > 2) return null;
-
-                const isTop = index === 0;
-                let style: React.CSSProperties = {};
-
-                if (isTop) {
-                  style = {
-                    transform: `translateX(${dragX}px) rotate(${
-                      dragX * 0.05
-                    }deg)`,
-                    zIndex: 30,
-                    cursor: isDragging ? "grabbing" : "grab",
-                    transition: isDragging
-                      ? "none"
-                      : "transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)",
-                    top: "20px", // Offset for the peeking cards above
-                  };
-                } else {
-                  const scale = 0.92 - index * 0.03;
-                  const translateY = -20 - index * 8;
-                  const opacity = 1 - index * 0.15;
-
-                  style = {
-                    transform: `scale(${scale}) translateY(${translateY}px)`,
-                    zIndex: 30 - index * 10,
-                    opacity: opacity,
-                    transition: "transform 0.3s ease, opacity 0.3s ease",
-                    filter: `brightness(${0.7 - index * 0.1})`,
-                  };
-                }
-
-                return (
-                  <div
-                    key={wallet.id}
-                    className="absolute top-0 left-0 w-full"
-                    style={style}
-                    onMouseDown={isTop ? onMouseDown : undefined}
-                    onTouchStart={isTop ? onTouchStart : undefined}
-                  >
-                    <BankCard
-                      balance={wallet.balance || "$0.00"}
-                      bankName={wallet.bankName}
-                      last4={wallet.last4}
-                      color={wallet.color}
-                      className="shadow-2xl"
-                    />
-                  </div>
-                );
-              })}
-            </div>
+            <SwipableCardStack<WalletCard>
+              items={wallets}
+              getItemKey={(wallet) => wallet.id}
+              className="h-[300px] w-full max-w-md mx-auto md:mx-0 pt-10"
+              renderCard={(wallet) => (
+                <BankCard
+                  balance={wallet.balance || "$0.00"}
+                  bankName={wallet.bankName}
+                  last4={wallet.last4}
+                  color={wallet.color}
+                  className="shadow-2xl"
+                />
+              )}
+            />
           </div>
 
           {/* Add New Account Card - Matched Height */}
-          <div className="space-y-4 mt-5">
-            <div className="border-2 border-dashed border-zinc-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center h-64 hover:border-zinc-700 hover:bg-zinc-800/30 transition-all cursor-pointer group">
+          <div className="space-y-4 mt-3">
+            <div className="border-2 border-dashed border-zinc-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center h-64 max-w-md hover:border-zinc-700 hover:bg-zinc-800/30 transition-all cursor-pointer group">
               <div className="w-14 h-14 rounded-full bg-zinc-800 group-hover:bg-zinc-700 flex items-center justify-center mb-4 transition-colors">
                 <Plus
                   className="text-zinc-400 group-hover:text-white"
@@ -168,11 +59,10 @@ export const UserWallet: React.FC = () => {
 
         {/* Connected Platforms Table */}
         <div className="mt-8">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-bold text-white">Linked Accounts</h3>
-          </div>
-
           <div className="bg-slate-900 rounded-2xl border border-slate-800 flex flex-col max-h-[600px]">
+            <div className="p-6 flex justify-between items-center border-b border-slate-800/50 shrink-0">
+              <h3 className="text-lg font-bold text-white">Linked Accounts</h3>
+            </div>
             <div className="p-6 overflow-y-auto">
               {/* Table Header */}
               <div className="hidden sm:grid grid-cols-12 sm:items-center text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 px-2">

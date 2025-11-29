@@ -50,6 +50,7 @@ export interface SplitMember {
 export interface Split {
   id: string;
   name: string;
+  platform: string;
   startDate: string;
   status: "active" | "inactive";
   creatorId: string;

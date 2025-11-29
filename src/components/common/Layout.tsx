@@ -144,7 +144,7 @@ export const Layout: React.FC<LayoutProps> = ({
       </div>
 
       {/* Mobile Header */}
-      <div className="md:hidden fixed top-0 w-full z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 p-4 flex justify-end items-center">
+      <div className="md:hidden fixed top-0 w-full z-60 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 p-4 flex justify-end items-center">
         <button
           onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
           className="text-slate-300"
@@ -155,7 +155,7 @@ export const Layout: React.FC<LayoutProps> = ({
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-30 md:hidden pt-16 bg-slate-900">
+        <div className="fixed inset-0 z-50 md:hidden pt-16 bg-slate-900">
           <SidebarContent />
         </div>
       )}

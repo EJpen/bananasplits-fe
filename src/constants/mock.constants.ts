@@ -9,6 +9,16 @@ import type {
 
 import { UserRole } from "../types";
 
+export const PLATFORMS = [
+  { id: "youtube", name: "YouTube"},
+  { id: "tiktok", name: "TikTok"},
+  { id: "instagram", name: "Instagram"},
+  { id: "onlyfans", name: "OnlyFans"},
+  { id: "twitch", name: "Twitch"},
+  { id: "patreon", name: "Patreon"},
+  { id: "spotify", name: "Spotify"}
+];
+
 export const MOCK_USERS: User[] = [
   {
     id: "1",
@@ -201,15 +211,15 @@ export const MOCK_USER_DISTRIBUTION = [
 export const MOCK_WALLETS: Wallet[] = [
   {
     id: "wallet_1",
-    bankName: "Chase",
+    bankName: "CHASE",
     last4: "4288",
-    balance: "$12,345.00",
+    balance: "$12,691.75",
     accountType: "Checking",
     platform: "YouTube",
   },
   {
     id: "wallet_2",
-    bankName: "Chase",
+    bankName: "CHASE",
     last4: "4288",
     balance: "$8,120.50",
     accountType: "Checking",
@@ -217,7 +227,7 @@ export const MOCK_WALLETS: Wallet[] = [
   },
   {
     id: "wallet_3",
-    bankName: "Wells Fargo",
+    bankName: "WELLS FARGO",
     last4: "9921",
     balance: "$3,450.25",
     accountType: "Savings",
@@ -225,7 +235,7 @@ export const MOCK_WALLETS: Wallet[] = [
   },
   {
     id: "wallet_4",
-    bankName: "Bank of America",
+    bankName: "BANK OF AMERICA",
     last4: "1120",
     balance: "$1,200.00",
     accountType: "Visa Debit",

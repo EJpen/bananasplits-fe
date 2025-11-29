@@ -99,6 +99,9 @@ export const UserSplits: React.FC = () => {
                         <h4 className="text-lg font-semibold text-white">
                           {split.name}
                         </h4>
+                        <span className="px-2 py-0.5 rounded text-xs font-bold uppercase bg-banana-400/10 text-banana-400 border border-banana-400/20">
+                          {split.platform}
+                        </span>
                         <span
                           className={`px-2 py-0.5 rounded text-xs font-bold uppercase ${
                             split.status === "active"

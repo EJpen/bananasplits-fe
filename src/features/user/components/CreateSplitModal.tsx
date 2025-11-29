@@ -1,18 +1,22 @@
 import React from "react";
 import Modal from "../../../components/common/Modal";
 import { Button } from "../../../components/common/UI";
+import { Dropdown } from "../../../components/common/Dropdown";
 import { useSplitStore } from "../stores/splitStore";
+import { PLATFORMS } from "../../../constants/mock.constants";
 import { Trash2 } from "lucide-react";
 
 export const CreateSplitModal: React.FC = () => {
   const {
     isCreateSplitOpen,
     splitName,
+    splitPlatform,
     splitStartDate,
     creatorPercentage,
     members,
     setCreateSplitOpen,
     setSplitName,
+    setSplitPlatform,
     setSplitStartDate,
     setCreatorPercentage,
     addMember,
@@ -25,7 +29,8 @@ export const CreateSplitModal: React.FC = () => {
   } = useSplitStore();
 
   const totalPercentage = getTotalPercentage();
-  const isValid = totalPercentage === 100 && splitName.trim() !== "";
+  const isValid =
+    totalPercentage === 100 && splitName.trim() !== "" && splitPlatform !== "";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,18 +50,31 @@ export const CreateSplitModal: React.FC = () => {
       size="lg"
     >
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Split Name */}
-        <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
-            * Split Name
-          </label>
-          <input
-            value={splitName}
-            onChange={(e) => setSplitName(e.target.value)}
-            placeholder="Enter split name"
-            required
-            className="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:border-banana-400"
-          />
+        {/* Split Name and Platform */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">
+              * Split Name
+            </label>
+            <input
+              value={splitName}
+              onChange={(e) => setSplitName(e.target.value)}
+              placeholder="Enter split name"
+              required
+              className="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:border-banana-400"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">
+              * Platform
+            </label>
+            <Dropdown
+              options={PLATFORMS}
+              value={splitPlatform}
+              onChange={setSplitPlatform}
+              placeholder="Select platform"
+            />
+          </div>
         </div>
 
         {/* Split Start Date */}

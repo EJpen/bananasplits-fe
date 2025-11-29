@@ -4,6 +4,7 @@ import type { Split, SplitMember } from "../../../types";
 interface SplitStore {
   isCreateSplitOpen: boolean;
   splitName: string;
+  splitPlatform: string;
   splitStartDate: string;
   creatorPercentage: number;
   members: SplitMember[];
@@ -18,6 +19,7 @@ interface SplitStore {
 
   setCreateSplitOpen: (open: boolean) => void;
   setSplitName: (name: string) => void;
+  setSplitPlatform: (platform: string) => void;
   setSplitStartDate: (date: string) => void;
   setCreatorPercentage: (percentage: number) => void;
   addMember: () => void;
@@ -42,6 +44,7 @@ interface SplitStore {
 export const useSplitStore = create<SplitStore>((set, get) => ({
   isCreateSplitOpen: false,
   splitName: "",
+  splitPlatform: "",
   splitStartDate: new Date().toISOString().split("T")[0],
   creatorPercentage: 50,
   members: [],
@@ -56,6 +59,7 @@ export const useSplitStore = create<SplitStore>((set, get) => ({
 
   setCreateSplitOpen: (open) => set({ isCreateSplitOpen: open }),
   setSplitName: (name) => set({ splitName: name }),
+  setSplitPlatform: (platform) => set({ splitPlatform: platform }),
   setSplitStartDate: (date) => set({ splitStartDate: date }),
   setCreatorPercentage: (percentage) => set({ creatorPercentage: percentage }),
 
@@ -102,6 +106,7 @@ export const useSplitStore = create<SplitStore>((set, get) => ({
     const newSplit: Split = {
       id: Date.now().toString(),
       name: state.splitName,
+      platform: state.splitPlatform,
       startDate: state.splitStartDate,
       status: "active",
       creatorId: "1",
@@ -122,6 +127,7 @@ export const useSplitStore = create<SplitStore>((set, get) => ({
     set({
       isCreateSplitOpen: false,
       splitName: "",
+      splitPlatform: "",
       splitStartDate: new Date().toISOString().split("T")[0],
       creatorPercentage: 50,
       members: [],

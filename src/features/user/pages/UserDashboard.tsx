@@ -3,19 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { Layout } from "../../../components/common/Layout";
 import { Button, Dialog, Card, Input } from "../../../components/common/UI";
 import Modal from "../../../components/common/Modal";
+import BankCard from "../../../components/common/BankCard";
+import { SwipableCardStack } from "../../../components/common/SwipableCardStack";
 import {
   MOCK_TRANSACTIONS,
   RATE_TIERS,
 } from "../../../constants/mock.constants";
 import { useUserDashboardStore } from "../stores/userDashboardStore";
 import { useSplitStore } from "../stores/splitStore";
+import { useWalletStore, type WalletCard } from "../stores/walletStore";
 import { CreateSplitModal } from "../components/CreateSplitModal";
 
 import {
   Plus,
   ArrowUpRight,
   ArrowDownLeft,
-  CreditCard,
   UserPlus,
   Banana,
   Percent,
@@ -58,6 +60,7 @@ export const UserDashboard: React.FC = () => {
   } = useUserDashboardStore();
 
   const { setCreateSplitOpen } = useSplitStore();
+  const { wallets } = useWalletStore();
 
   const handleInvite = (e: React.FormEvent) => {
     e.preventDefault();
@@ -248,35 +251,30 @@ export const UserDashboard: React.FC = () => {
             </div>
 
             {/* Card Widget */}
-            <div className="bg-linear-to-br from-banana-600 to-banana-500 rounded-xl p-6 text-dark-900 shadow-lg relative overflow-hidden">
-              <div className="absolute -right-6 -bottom-6 opacity-20">
-                <Banana size={120} className="text-white" />
-              </div>
-              <div className="relative z-10">
-                <div className="flex justify-between items-start mb-8">
-                  <CreditCard className="text-dark-900" size={24} />
-                  <span className="font-mono text-sm font-bold opacity-75">
-                    CHASE
-                  </span>
-                </div>
-                <div className="mb-4">
-                  <p className="text-xs opacity-75 uppercase font-bold tracking-wider mb-1">
-                    Balance
-                  </p>
-                  <p className="text-3xl font-bold">$12,450.00</p>
-                </div>
-                <div className="flex justify-between items-end">
-                  <p className="font-mono text-sm opacity-80">
-                    •••• •••• •••• 4288
-                  </p>
-                  <Button
-                    className="bg-dark-900/20 hover:bg-dark-900/30 text-dark-900 border-none text-xs px-3 py-1.5"
-                    onClick={() => navigate("/dashboard/wallet")}
-                  >
-                    Manage
-                  </Button>
-                </div>
-              </div>
+            <div className={`relative ${wallets.length > 1 ? "pt-10" : ""}`}>
+              <SwipableCardStack<WalletCard>
+                items={wallets}
+                getItemKey={(wallet) => wallet.id}
+                className="h-[280px] w-full"
+                maxVisibleCards={3}
+                renderCard={(wallet) => (
+                  <BankCard
+                    balance={wallet.balance || "$0.00"}
+                    bankName={wallet.bankName}
+                    last4={wallet.last4}
+                    color={wallet.color}
+                    className="shadow-lg"
+                  />
+                )}
+              />
+              {/* <div className="absolute bottom-4 right-4 z-40">
+                <Button
+                  className="bg-dark-900/20 hover:bg-dark-900/30 text-dark-900 border-none text-xs px-3 py-1.5"
+                  onClick={() => navigate("/dashboard/wallet")}
+                >
+                  Manage
+                </Button>
+              </div> */}
             </div>
 
             {/* My Team Teaser */}
