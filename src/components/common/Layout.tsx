@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
   Users,
@@ -154,11 +155,19 @@ export const Layout: React.FC<LayoutProps> = ({
       </div>
 
       {/* Mobile Drawer */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden pt-16 bg-slate-900">
-          <SidebarContent />
-        </div>
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-0 z-50 md:hidden pt-16 bg-slate-900"
+          >
+            <SidebarContent />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Main Content */}
       <main className="flex-1 md:ml-64 p-4 pt-20 md:p-8 overflow-y-auto h-screen">

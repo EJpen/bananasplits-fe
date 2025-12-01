@@ -79,10 +79,10 @@ export const UserDashboard: React.FC = () => {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button variant="secondary" onClick={() => setInviteOpen(true)}>
+            {/* <Button variant="secondary" onClick={() => setInviteOpen(true)}>
               <UserPlus size={18} className="mr-2" />
               Invite Member
-            </Button>
+            </Button> */}
             <Button onClick={() => setCreateSplitOpen(true)}>
               <Plus size={18} className="mr-2" />
               New Split
