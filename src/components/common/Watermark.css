@@ -1,0 +1,101 @@
+/* 
+ * Watermark Styles
+ */
+
+.watermark-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  /* Ensures watermark never blocks UI interaction */
+  z-index: 9999;
+  /* Places watermark on top of all content */
+  user-select: none;
+  /* Prevents text selection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.watermark-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  transform-origin: center center;
+}
+
+.watermark-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Desktop / Tablet rotation: 30° (within 20°–40° range) */
+.watermark-desktop .watermark-content {
+  transform: translate(-50%, -50%) rotate(-30deg);
+}
+
+/* Mobile rotation: 90° */
+.watermark-mobile .watermark-content {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .watermark-text {
+    font-size: 1.75rem;
+    gap: 40px;
+  }
+
+  .watermark-content {
+    gap: 50px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .watermark-text {
+    font-size: 2rem;
+  }
+
+  .watermark-content {
+    gap: 60px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .watermark-text {
+    font-size: 2.5rem;
+  }
+
+  .watermark-content {
+    gap: 80px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .watermark-text {
+    color: rgba(255, 255, 255, 0.18);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .watermark-text {
+    color: rgba(255, 255, 255, 0.08);
+  }
+}

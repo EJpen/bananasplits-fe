@@ -16,27 +16,31 @@ import { UserTeam } from "./features/user/pages/UserTeam";
 import { UserTransactions } from "./features/user/pages/UserTransactions";
 import { UserWallet } from "./features/user/pages/UserWallet";
 import { UserSettings } from "./features/user/pages/UserSettings";
+import Watermark from "./components/common/Watermark";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<UserDashboard />} />
-        <Route path="/dashboard/splits" element={<UserSplits />} />
-        <Route path="/dashboard/team" element={<UserTeam />} />
-        <Route path="/dashboard/transactions" element={<UserTransactions />} />
-        <Route path="/dashboard/wallet" element={<UserWallet />} />
-        <Route path="/dashboard/settings" element={<UserSettings />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/users" element={<AdminUsers />} />
-        <Route path="/admin/settings" element={<AdminSettings />} />
+    <>
+      <Watermark />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
+          <Route path="/dashboard/splits" element={<UserSplits />} />
+          <Route path="/dashboard/team" element={<UserTeam />} />
+          <Route path="/dashboard/transactions" element={<UserTransactions />} />
+          <Route path="/dashboard/wallet" element={<UserWallet />} />
+          <Route path="/dashboard/settings" element={<UserSettings />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    </>
   );
 };
 
